@@ -24,7 +24,7 @@ public class BrickerGameManager extends GameManager {
     private static final int PADDLE_HEIGHT = 20;
     private static final int PADDLE_WIDTH = 100;
     private static final int BALL_RADIUS = 40;
-    public static final float BALL_SPEED = 350;
+    public static final float BALL_SPEED = 100;
     public static final int ZERO = 0;
     public static final int COLUMNS_OF_BRICKS = 7;
     public static final int ROWS_OF_BRICKS = 8;
