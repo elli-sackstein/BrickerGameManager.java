@@ -2,7 +2,6 @@ package src.brick_strategies;
 
 import danogl.GameObject;
 import danogl.collisions.GameObjectCollection;
-import danogl.collisions.Layer;
 import danogl.gui.ImageReader;
 import danogl.gui.Sound;
 import danogl.gui.SoundReader;
@@ -16,7 +15,7 @@ import java.util.Random;
 
 import static src.BrickerGameManager.*;
 
-public class AdditionalBallsStrategy extends CollisionStrategy{
+public class AdditionalBallsStrategy extends BasicCollisionStrategy {
     // ====================== constants ======================
     public static final String ASSETS_BALL_PNG = "assets/mockBall.png";
     // ====================== fields ======================
