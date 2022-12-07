@@ -21,17 +21,14 @@ public class AdditionalBallsStrategy extends BasicCollisionStrategy {
     private final Vector2 brickPosition;
     private final ImageReader imageReader;
     private final SoundReader soundReader;
-    private final WindowController windowController;
 
     public AdditionalBallsStrategy(GameObjectCollection gameObjects, Vector2 brickDimensions,
-                                   Vector2 brickPosition, ImageReader imageReader, SoundReader soundReader,
-                                   WindowController windowController) {
+                                   Vector2 brickPosition, ImageReader imageReader, SoundReader soundReader) {
         super(gameObjects);
         this.brickDimensions = brickDimensions;
         this.brickPosition = brickPosition;
         this.imageReader = imageReader;
         this.soundReader = soundReader;
-        this.windowController = windowController;
     }
 
     @Override

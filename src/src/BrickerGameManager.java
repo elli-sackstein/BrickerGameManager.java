@@ -135,7 +135,7 @@ public class BrickerGameManager extends GameManager {
             brickPosition,
             imageReader,
             soundReader,
-            windowController);
+            inputListener);
 
         Renderable brickImage = imageReader.readImage(ASSETS_BRICK_PNG, false);
         var brick = new Brick(Vector2.ZERO, brickDimensions,

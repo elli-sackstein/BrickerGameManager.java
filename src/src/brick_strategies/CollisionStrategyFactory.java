@@ -9,15 +9,15 @@ public class CollisionStrategyFactory {
     public CollisionStrategy create(
         GameObjectCollection gameObjects, Vector2 brickDimensions,
         Vector2 brickPosition, ImageReader imageReader, SoundReader soundReader,
-        WindowController windowController) {
+        UserInputListener inputListener) {
 
-//        return new BasicCollisionStrategy(gameObjects);
+        //return new BasicCollisionStrategy(gameObjects);
         return new AdditionalBallsStrategy(
             gameObjects,
             brickDimensions,
             brickPosition,
             imageReader,
-            soundReader,
-            windowController);
+            soundReader
+        );
     }
 }
