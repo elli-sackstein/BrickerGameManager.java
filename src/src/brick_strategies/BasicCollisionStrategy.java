@@ -6,7 +6,7 @@ import danogl.collisions.Layer;
 import danogl.util.Counter;
 
 public class BasicCollisionStrategy implements CollisionStrategy {
-    private final GameObjectCollection gameObjects;
+    protected final GameObjectCollection gameObjects;
 
     public BasicCollisionStrategy(GameObjectCollection gameObjects){
         this.gameObjects = gameObjects;
@@ -17,5 +17,4 @@ public class BasicCollisionStrategy implements CollisionStrategy {
         gameObjects.removeGameObject(collidedObj, Layer.STATIC_OBJECTS);
         bricksCounter.decrement();
     }
-
 }

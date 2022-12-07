@@ -11,13 +11,13 @@ public class CollisionStrategyFactory {
         Vector2 brickPosition, ImageReader imageReader, SoundReader soundReader,
         WindowController windowController) {
 
-        return new BasicCollisionStrategy(gameObjects);
-//        return new AdditionalBallsStrategy(
-//            gameObjects,
-//            brickDimensions,
-//            brickPosition,
-//            imageReader,
-//            soundReader,
-//            windowController);
+//        return new BasicCollisionStrategy(gameObjects);
+        return new AdditionalBallsStrategy(
+            gameObjects,
+            brickDimensions,
+            brickPosition,
+            imageReader,
+            soundReader,
+            windowController);
     }
 }

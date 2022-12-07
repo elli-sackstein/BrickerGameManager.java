@@ -10,7 +10,6 @@ import danogl.gui.*;
 import danogl.gui.rendering.Renderable;
 import danogl.util.Vector2;
 import java.awt.event.KeyEvent;
-import java.util.Random;
 
 public class BrickerGameManager extends GameManager {
     // ====================== window messages ======================
@@ -24,7 +23,6 @@ public class BrickerGameManager extends GameManager {
     private static final int PADDLE_HEIGHT = 20;
     private static final int PADDLE_WIDTH = 100;
     private static final int BALL_RADIUS = 40;
-    public static final float BALL_SPEED = 100;
     public static final int ZERO = 0;
     public static final int COLUMNS_OF_BRICKS = 7;
     public static final int ROWS_OF_BRICKS = 8;
@@ -34,7 +32,6 @@ public class BrickerGameManager extends GameManager {
     public static final int WIDGETS_LEN = NUM_OF_LIVES * WIDGET_SIZE;
     public static final int MIN_DIST_FROM_EDGE = 15;
     public static final int TWO = 2;
-    public static final int OPPOSITE_DIRECTION = -1;
     public static final int PADDLE_DIST_FROM_BOTTOM = 30;
     public static final int WINDOW_WIDTH = 700;
     public static final int WINDOW_HEIGHT = 500;
@@ -153,21 +150,19 @@ public class BrickerGameManager extends GameManager {
         Renderable ballImage =
             imageReader.readImage(ASSETS_BALL_PNG, true);
         Sound collisionSound = soundReader.readSound(ASSETS_BLOP_WAV);
-        ball = new Ball(
-            Vector2.ZERO, new Vector2(BALL_RADIUS, BALL_RADIUS), ballImage, collisionSound);
-
         Vector2 windowDimensions = windowController.getWindowDimensions();
-        ball.setCenter(windowDimensions.mult(HALF));
+
+        ball = new Ball(
+            Vector2.ZERO,
+            new Vector2(BALL_RADIUS, BALL_RADIUS),
+            windowDimensions.mult(HALF),
+            ballImage,
+            collisionSound
+        );
+
         gameObjects().addGameObject(ball);
 
-        float ballVelX = BALL_SPEED;
-        float ballVelY = BALL_SPEED;
-        Random rand = new Random();
-        if (rand.nextBoolean())
-            ballVelX *= OPPOSITE_DIRECTION;
-        if (rand.nextBoolean())
-            ballVelY *= OPPOSITE_DIRECTION;
-        ball.setVelocity(new Vector2(ballVelX, ballVelY));
+        ball.setRandomVelocity();
     }
 
     private void createPaddle(
