@@ -12,10 +12,14 @@ public class GraphicLifeCounter extends GameObject {
     public static final double HALF = 0.5;
     public static final int ONE = 1;
     public static final int WIDGET_SIZE = 30;
+    private Vector2 widgetTopLeftCorner;
     private final Counter livesCounter;
+    private Renderable widgetRenderable;
     private final GameObjectCollection gameObjectsCollection;
     private int numOfLives;
     private GameObject[] gameObjects;
+    private final int objLocationX;
+    private final int objLocationY;
     /**
      * Construct a new GameObject instance.
      *
@@ -33,22 +37,33 @@ public class GraphicLifeCounter extends GameObject {
                               int numOfLives) {
         // initialize super and private fields
         super(widgetTopLeftCorner,  widgetDimensions, widgetRenderable);
+        this.widgetTopLeftCorner = widgetTopLeftCorner;
         this.livesCounter = livesCounter;
+        this.widgetRenderable = widgetRenderable;
         this.gameObjectsCollection = gameObjectsCollection;
         this.numOfLives = numOfLives;
 
         // calculates the center of the first heart
-        int objLocationX = (int)(widgetTopLeftCorner.x() + HALF * WIDGET_SIZE);
-        int objLocationY = (int)(widgetTopLeftCorner.y() - HALF * WIDGET_SIZE);
+        objLocationX = (int)(widgetTopLeftCorner.x() + HALF * WIDGET_SIZE);
+        objLocationY = (int)(widgetTopLeftCorner.y() - HALF * WIDGET_SIZE);
 
         // creates the private array of hearts and places them by their center
-        createGameObjectsArray(numOfLives);
+        createGameObjectsArray(numOfLives + 1);
         for (int i = 0; i < numOfLives; i++) {
             gameObjects[i] = new GameObject(
                     widgetTopLeftCorner, new Vector2(WIDGET_SIZE, WIDGET_SIZE), widgetRenderable);
             gameObjects[i].setCenter(new Vector2(objLocationX + i * WIDGET_SIZE, objLocationY));
             gameObjectsCollection.addGameObject(gameObjects[i], Layer.UI);
         }
+    }
+    public void placeCollectedHeart(){
+        GameObject heart = new GameObject(
+                widgetTopLeftCorner, new Vector2(WIDGET_SIZE, WIDGET_SIZE), widgetRenderable);
+        System.out.println(livesCounter.value());
+        gameObjects[livesCounter.value()-1] = heart;
+        heart.setCenter(new Vector2(objLocationX + numOfLives * WIDGET_SIZE, objLocationY));
+        gameObjectsCollection.addGameObject(heart, Layer.UI);
+        numOfLives++;
     }
     private void createGameObjectsArray(int numOfLives) {
         // creates the private array of hearts
@@ -60,6 +75,7 @@ public class GraphicLifeCounter extends GameObject {
         // updates the hearts according to counter
         int lastIndex = numOfLives - ONE;
         super.update(deltaTime);
+
         if (livesCounter.value() < numOfLives){
             gameObjectsCollection.removeGameObject(gameObjects[lastIndex], Layer.UI);
             numOfLives--;

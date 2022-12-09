@@ -12,40 +12,48 @@ import static src.BrickerGameManager.ASSETS_BLOP_WAV;
 public class AdditionalDiskStrategy extends BasicCollisionStrategy {
     // ====================== constants ======================
     public static final String DISK_PNG = "assets/botGood.png";
+    private static final int PADDLE_HEIGHT = 20;
+    private static final int PADDLE_WIDTH = 100;
+    public static final int MIN_DIST_FROM_EDGE = 15;
+    public static final int TWO = 2;
     // ====================== fields ======================
     private final Vector2 brickDimensions;
-    private final Vector2 brickPosition;
     private final ImageReader imageReader;
-    private final SoundReader soundReader;
-    private UserInputListener inputListener;
+    private final UserInputListener inputListener;
+    private final Vector2 windowDimensions;
+    private Paddle paddle;
+    private Counter paddlesCounter;
+    private Counter collisionsCounter;
 
     public AdditionalDiskStrategy(
-        GameObjectCollection gameObjects, Vector2 brickDimensions,
-        Vector2 brickPosition, ImageReader imageReader, SoundReader soundReader, UserInputListener inputListener) {
+            GameObjectCollection gameObjects, Vector2 brickDimensions, ImageReader imageReader,
+            UserInputListener inputListener, Vector2 windowDimensions, Counter paddlesCounter,
+            Counter collisionsCounter) {
         super(gameObjects);
         this.brickDimensions = brickDimensions;
-        this.brickPosition = brickPosition;
         this.imageReader = imageReader;
-        this.soundReader = soundReader;
         this.inputListener = inputListener;
+        this.windowDimensions = windowDimensions;
+        this.paddlesCounter = paddlesCounter;
+        this.collisionsCounter = collisionsCounter;
     }
 
     @Override
     public void onCollision(GameObject collidedObj, GameObject colliderObj, Counter bricksCounter) {
         super.onCollision(collidedObj, colliderObj, bricksCounter);
-
-//        Renderable paddleImage = imageReader.readImage(
-//            DISK_PNG, false);
-//        new createPaddle(paddleImage, inputListener)
+        if (paddlesCounter.value() == 0){
+            createPaddle();
+            paddlesCounter.increment();
+        }
     }
 
-//    private void createPaddle(
-//        Renderable paddleImage, UserInputListener inputListener, Vector2 windowDimensions) {
-//        GameObject Paddle = new Paddle(Vector2.ZERO, new Vector2(PADDLE_WIDTH, PADDLE_HEIGHT),
-//            paddleImage, inputListener, windowDimensions, MIN_DIST_FROM_EDGE);
-//
-//        Paddle.setCenter(new Vector2(
-//            windowDimensions.x() / TWO, (int) windowDimensions.y() - PADDLE_DIST_FROM_BOTTOM));
-//        gameObjects().addGameObject(Paddle);
-//    }
+    private void createPaddle() {
+        Renderable paddleImage = imageReader.readImage(DISK_PNG, false);
+        paddle = new Paddle(Vector2.ZERO, brickDimensions, paddleImage, inputListener, windowDimensions,
+                MIN_DIST_FROM_EDGE, this, gameObjects, false);
+
+        paddle.setCenter(new Vector2(
+                windowDimensions.x() / TWO, (int) (windowDimensions.y() / TWO)));
+        gameObjects.addGameObject(paddle, Layer.STATIC_OBJECTS);
+    }
 }

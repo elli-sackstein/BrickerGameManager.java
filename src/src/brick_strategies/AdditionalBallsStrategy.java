@@ -1,5 +1,6 @@
 package src.brick_strategies;
 
+import danogl.GameManager;
 import danogl.GameObject;
 import danogl.collisions.*;
 import danogl.gui.ImageReader;
@@ -12,7 +13,7 @@ import danogl.util.Vector2;
 import src.gameobjects.Ball;
 
 import static src.BrickerGameManager.*;
-
+//TODO: fix the balls layer
 public class AdditionalBallsStrategy extends BasicCollisionStrategy {
     // ====================== constants ======================
     public static final String ASSETS_BALL_PNG = "assets/mockBall.png";
@@ -21,14 +22,17 @@ public class AdditionalBallsStrategy extends BasicCollisionStrategy {
     private final Vector2 brickPosition;
     private final ImageReader imageReader;
     private final SoundReader soundReader;
+    private GameManager gameManager;
 
     public AdditionalBallsStrategy(GameObjectCollection gameObjects, Vector2 brickDimensions,
-                                   Vector2 brickPosition, ImageReader imageReader, SoundReader soundReader) {
+                                   Vector2 brickPosition, ImageReader imageReader, SoundReader soundReader,
+                                   GameManager gameManager) {
         super(gameObjects);
         this.brickDimensions = brickDimensions;
         this.brickPosition = brickPosition;
         this.imageReader = imageReader;
         this.soundReader = soundReader;
+        this.gameManager = gameManager;
     }
 
     @Override
@@ -39,7 +43,6 @@ public class AdditionalBallsStrategy extends BasicCollisionStrategy {
         }
     }
 
-    // duplicated code from BrickGameManager
     private void createBall(int index) {
         Renderable ballImage = imageReader.readImage(ASSETS_BALL_PNG, true);
         Sound collisionSound = soundReader.readSound(ASSETS_BLOP_WAV);
@@ -53,8 +56,11 @@ public class AdditionalBallsStrategy extends BasicCollisionStrategy {
                 new Vector2(radius, radius),
                 new Vector2(posX, posY),
                 ballImage,
-                collisionSound
+                collisionSound,
+                false,
+                gameManager
         );
+        // TODO:why not in the constructor?
         ball.setRandomVelocity();
 
         gameObjects.addGameObject(ball, Layer.STATIC_OBJECTS);

@@ -12,6 +12,8 @@ import java.awt.*;
 public class NumericLifeCounter extends GameObject {
     public static final int TWO_LIVES = 2;
     public static final int ONE_LIFE = 1;
+    private static final int THREE_LIVES = 3;
+    private static final int FOUR_LIVES = 4;
     private final TextRenderable textRenderable;
     private final Counter livesCounter;
     /**
@@ -42,6 +44,16 @@ public class NumericLifeCounter extends GameObject {
     // this method updates the number of lives left, and changes colors accordingly.
     public void update(float deltaTime) {
         super.update(deltaTime);
+        if (livesCounter.value() == FOUR_LIVES)
+        {
+            textRenderable.setColor(Color.GREEN);
+            textRenderable.setString(Integer.toString(livesCounter.value()));
+        }
+        if (livesCounter.value() == THREE_LIVES)
+        {
+            textRenderable.setColor(Color.GREEN);
+            textRenderable.setString(Integer.toString(livesCounter.value()));
+        }
         if (livesCounter.value() == TWO_LIVES)
         {
             textRenderable.setColor(Color.YELLOW);

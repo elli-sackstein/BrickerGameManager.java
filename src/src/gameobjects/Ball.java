@@ -1,9 +1,11 @@
 package src.gameobjects;
 
+import danogl.GameManager;
 import danogl.GameObject;
 import danogl.collisions.Collision;
 import danogl.gui.Sound;
 import danogl.gui.rendering.Renderable;
+import danogl.util.Counter;
 import danogl.util.Vector2;
 
 import java.util.Random;
@@ -14,6 +16,9 @@ public class Ball extends GameObject {
     private static final int OPPOSITE_DIRECTION = -1;
 
     private final Sound collisionSound;
+    private Boolean mainBall;
+    private GameManager gameManager;
+    private Counter collisionsCounter;
 
     /**
      * Construct a new GameObject instance.
@@ -24,14 +29,19 @@ public class Ball extends GameObject {
      * @param collisionSound The collision sound.
      */
     public Ball(
-        Vector2 topLeftCorner,
-        Vector2 dimensions,
-        Vector2 position,
-        Renderable renderable,
-        Sound collisionSound) {
+            Vector2 topLeftCorner,
+            Vector2 dimensions,
+            Vector2 position,
+            Renderable renderable,
+            Sound collisionSound,
+            Boolean mainBall,
+            GameManager gameManager) {
         super(topLeftCorner, dimensions, renderable);
         this.collisionSound = collisionSound;
+        this.mainBall = mainBall;
+        this.gameManager = gameManager;
         setCenter(position);
+        collisionsCounter = new Counter(0);
     }
 
     @Override
@@ -40,6 +50,9 @@ public class Ball extends GameObject {
         Vector2 newVel = getVelocity().flipped(collision.getNormal());
         setVelocity(newVel);
         collisionSound.play();
+        if (mainBall){
+            collisionsCounter.increment();
+        }
     }
 
     public void setRandomVelocity(){
@@ -51,5 +64,9 @@ public class Ball extends GameObject {
         if (rand.nextBoolean())
             ballVelY *= OPPOSITE_DIRECTION;
         setVelocity(new Vector2(ballVelX, ballVelY));
+    }
+
+    public Counter getCollisionCounter(){
+        return collisionsCounter;
     }
 }
