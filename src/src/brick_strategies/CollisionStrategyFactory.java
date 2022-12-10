@@ -11,6 +11,7 @@ import src.gameobjects.GraphicLifeCounter;
 import java.util.Random;
 
 public class CollisionStrategyFactory {
+    private Counter powerUpCounter;
     private final static int NUM_OF_STRATEGY = 6;
     private GameObjectCollection gameObjects;
     private Vector2 brickDimensions;
@@ -47,28 +48,34 @@ public class CollisionStrategyFactory {
         this.gameManager = gameManager;
         this.ball = ball;
         this.windowController = windowController;
-
-        Random random = new Random();
-        int rand = random.nextInt(NUM_OF_STRATEGY -1);
-        return chooseStrategy(rand);
+        powerUpCounter = new Counter(3);
+        return chooseStrategy(0, NUM_OF_STRATEGY);
     }
 
-    public CollisionStrategy chooseStrategy(int rand){
-//        switch (rand){
-//            case 0:
-//                return new BasicCollisionStrategy(gameObjects);
-//            case 1:
-//                return new AdditionalBallsStrategy(gameObjects, brickDimensions, brickPosition, imageReader,
-//                        soundReader, gameManager);
-//            case 2:
-//                return new AdditionalDiskStrategy(gameObjects, brickDimensions, imageReader, inputListener,
-//                        windowDimensions, paddlesCounter, collisionsCounter);
-//            case 3:
-//                return new CameraStrategy(gameObjects, gameManager, ball, windowController);
-//            case 4:
+    public CollisionStrategy chooseStrategy(int minStrategies, int maxStrategies){
+        int rand = getRandomNumberUsingNextInt(minStrategies,maxStrategies);
+        switch (rand){
+            case 0:
+                return new BasicCollisionStrategy(gameObjects);
+            case 1:
+                return new AdditionalBallsStrategy(gameObjects, brickDimensions, brickPosition, imageReader,
+                        soundReader, gameManager);
+            case 2:
+                return new AdditionalDiskStrategy(gameObjects, brickDimensions, imageReader, inputListener,
+                        windowDimensions, paddlesCounter, collisionsCounter);
+            case 3:
+                return new CameraStrategy(gameObjects, gameManager, ball, windowController);
+            case 4:
                 return new AddLifeStrategy(gameObjects, imageReader, brickPosition, windowDimensions,
                         livesCounter, graphicLifeCounter);
-//        }
-//        return new BasicCollisionStrategy(gameObjects);
+            case 5:
+                return new powerUpStrategy(gameObjects,this, powerUpCounter);
+        }
+        return new BasicCollisionStrategy(gameObjects);
+    }
+
+    public int getRandomNumberUsingNextInt(int min, int max) {
+        Random random = new Random();
+        return random.nextInt(max - min) + min;
     }
 }

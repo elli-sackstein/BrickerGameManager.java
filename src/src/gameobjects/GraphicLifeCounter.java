@@ -59,7 +59,6 @@ public class GraphicLifeCounter extends GameObject {
     public void placeCollectedHeart(){
         GameObject heart = new GameObject(
                 widgetTopLeftCorner, new Vector2(WIDGET_SIZE, WIDGET_SIZE), widgetRenderable);
-        System.out.println(livesCounter.value());
         gameObjects[livesCounter.value()-1] = heart;
         heart.setCenter(new Vector2(objLocationX + numOfLives * WIDGET_SIZE, objLocationY));
         gameObjectsCollection.addGameObject(heart, Layer.UI);
