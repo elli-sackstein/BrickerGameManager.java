@@ -49,12 +49,12 @@ public class CollisionStrategyFactory {
         this.ball = ball;
         this.windowController = windowController;
         powerUpCounter = new Counter(3);
-        return chooseStrategy(0, NUM_OF_STRATEGY);
+        int rand = getRandomNumberUsingNextInt(0, NUM_OF_STRATEGY);
+        return chooseStrategy(rand);
     }
 
-    public CollisionStrategy chooseStrategy(int minStrategies, int maxStrategies){
-        int rand = getRandomNumberUsingNextInt(minStrategies,maxStrategies);
-        switch (rand){
+    public CollisionStrategy chooseStrategy(int strategyIndex){
+        switch (strategyIndex){
             case 0:
                 return new BasicCollisionStrategy(gameObjects);
             case 1:

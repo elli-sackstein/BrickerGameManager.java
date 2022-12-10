@@ -32,10 +32,12 @@ public class powerUpStrategy extends BasicCollisionStrategy{
     private void createCollisionArray() {
         while (powerUpCounter.value() > 0) {
             if (powerUpCounter.value() == 1) {
-                CollisionStrategy strategy = factory.chooseStrategy(0, 4);
+                int rand = factory.getRandomNumberUsingNextInt(0, 4);
+                CollisionStrategy strategy = factory.chooseStrategy(rand);
                 strategies[strategiesIndex] = strategy;
             } else {
-                CollisionStrategy strategy = factory.chooseStrategy(1, 5);
+                int rand = factory.getRandomNumberUsingNextInt(1, 5);
+                CollisionStrategy strategy = factory.chooseStrategy(rand);
                 if (strategy.getClass() != this.getClass()) {
                     strategies[strategiesIndex] = strategy;
                     strategiesIndex++;
