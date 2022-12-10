@@ -38,6 +38,5 @@ public class Brick extends GameObject {
     public void onCollisionEnter(GameObject other, Collision collision) {
         super.onCollisionEnter(other, collision);
         strategy.onCollision(this, other, counter, true);
-        System.out.printf("Brick top left corner %s\n", getTopLeftCorner().toString());
     }
 }

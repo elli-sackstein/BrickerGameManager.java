@@ -35,8 +35,6 @@ public class AddLifeStrategy extends BasicCollisionStrategy{
         if (remove) {
             super.onCollision(collidedObj, colliderObj, bricksCounter, false);
         }
-        System.out.printf("Addlife position %s\n", this.position.toString());
-
         createHeart();
     }
 
