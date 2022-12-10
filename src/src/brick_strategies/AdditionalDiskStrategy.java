@@ -36,7 +36,7 @@ public class AdditionalDiskStrategy implements CollisionStrategy {
     }
 
     @Override
-    public void onCollision(GameObject collidedObj, GameObject colliderObj, Counter bricksCounter, boolean remove) {
+    public void onCollision(GameObject collidedObj, GameObject colliderObj, Counter bricksCounter) {
         if (paddlesCounter.value() == 0){
             createPaddle();
             paddlesCounter.increment();

@@ -11,6 +11,6 @@ public class BasicCollisionStrategy implements CollisionStrategy {
     }
 
     @Override
-    public void onCollision(GameObject collidedObj, GameObject colliderObj, Counter bricksCounter, boolean remove) {
+    public void onCollision(GameObject collidedObj, GameObject colliderObj, Counter bricksCounter) {
     }
 }

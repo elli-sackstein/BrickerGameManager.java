@@ -18,11 +18,11 @@ public class PowerUpStrategy implements CollisionStrategy{
     }
 
     @Override
-    public void onCollision(GameObject collidedObj, GameObject colliderObj, Counter bricksCounter, boolean remove) {
+    public void onCollision(GameObject collidedObj, GameObject colliderObj, Counter bricksCounter) {
         var strategies = createCollisionArray();
 
         for (int i = 0; i < strategies.length; i++) {
-            strategies[i].onCollision(collidedObj, colliderObj, bricksCounter, i == strategies.length - 1);
+            strategies[i].onCollision(collidedObj, colliderObj, bricksCounter);
         }
     }
 

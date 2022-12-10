@@ -46,7 +46,7 @@ public class CollisionStrategyFactory {
         this.ball = ball;
         this.windowController = windowController;
         powerUpCounter = new Counter(3);
-        int rand = 5;//getRandomNumberUsingNextInt(0, NUM_OF_STRATEGY);
+        int rand = getRandomNumberUsingNextInt(0, NUM_OF_STRATEGY);
         return chooseStrategy(rand, brickPosition);
     }
 
