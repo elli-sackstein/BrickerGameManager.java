@@ -4,5 +4,5 @@ import danogl.GameObject;
 import danogl.util.Counter;
 
 public interface CollisionStrategy {
-    void onCollision(GameObject collidedObj, GameObject colliderObj, Counter bricksCounter);
+    void onCollision(GameObject collidedObj, GameObject colliderObj, Counter bricksCounter, boolean remove);
 }

@@ -2,28 +2,29 @@ package src.brick_strategies;
 
 import danogl.GameObject;
 import danogl.collisions.GameObjectCollection;
-import danogl.util.Counter;
+import danogl.util.*;
 
 public class powerUpStrategy extends BasicCollisionStrategy{
+    private Vector2 brickPosition;
     private Counter powerUpCounter;
     private CollisionStrategyFactory factory;
     private CollisionStrategy[] strategies;
     private int strategiesIndex;
     public powerUpStrategy(GameObjectCollection gameObjects, CollisionStrategyFactory factory,
-                           Counter powerUpCounter) {
+                           Vector2 brickPosition, Counter powerUpCounter) {
         super(gameObjects);
         this.factory = factory;
+        this.brickPosition = brickPosition;
         this.powerUpCounter = powerUpCounter;
         this.strategies = new CollisionStrategy[powerUpCounter.value()];
         this.strategiesIndex = 0;
     }
 
     @Override
-    public void onCollision(GameObject collidedObj, GameObject colliderObj, Counter bricksCounter) {
+    public void onCollision(GameObject collidedObj, GameObject colliderObj, Counter bricksCounter, boolean remove) {
         createCollisionArray();
         for (int i = 0; i < strategies.length; i++) {
-            System.out.println("got here, strategy: " + strategies[i].getClass());
-            strategies[i].onCollision(collidedObj, colliderObj, bricksCounter);
+            strategies[i].onCollision(collidedObj, colliderObj, bricksCounter, i == strategies.length - 1);
         }
         // the counter decreases 3 times instead of 1
         bricksCounter.increaseBy(2);
@@ -31,21 +32,22 @@ public class powerUpStrategy extends BasicCollisionStrategy{
 
     private void createCollisionArray() {
         while (powerUpCounter.value() > 0) {
-            if (powerUpCounter.value() == 1) {
-                int rand = factory.getRandomNumberUsingNextInt(0, 4);
-                CollisionStrategy strategy = factory.chooseStrategy(rand);
-                strategies[strategiesIndex] = strategy;
-            } else {
-                int rand = factory.getRandomNumberUsingNextInt(1, 5);
-                CollisionStrategy strategy = factory.chooseStrategy(rand);
-                if (strategy.getClass() != this.getClass()) {
-                    strategies[strategiesIndex] = strategy;
-                    strategiesIndex++;
-                } else {
-                    System.out.println();
-                }
-            }
+            int rand = getRand(powerUpCounter.value());
+            createStrategy(rand);
             powerUpCounter.decrement();
         }
+    }
+
+    private int getRand(int value) {
+        if (value == 1) {
+            return factory.getRandomNumberUsingNextInt(0, 5);
+        }
+        return factory.getRandomNumberUsingNextInt(1, 5);
+    }
+
+    private void createStrategy(int rand) {
+        CollisionStrategy strategy = factory.chooseStrategy(rand, this.brickPosition);
+        strategies[strategiesIndex] = strategy;
+        strategiesIndex++;
     }
 }

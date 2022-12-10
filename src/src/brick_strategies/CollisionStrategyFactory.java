@@ -50,10 +50,10 @@ public class CollisionStrategyFactory {
         this.windowController = windowController;
         powerUpCounter = new Counter(3);
         int rand = getRandomNumberUsingNextInt(0, NUM_OF_STRATEGY);
-        return chooseStrategy(rand);
+        return chooseStrategy(rand, brickPosition);
     }
 
-    public CollisionStrategy chooseStrategy(int strategyIndex){
+    public CollisionStrategy chooseStrategy(int strategyIndex, Vector2 brickPosition){
         switch (strategyIndex){
             case 0:
                 return new BasicCollisionStrategy(gameObjects);
@@ -69,7 +69,7 @@ public class CollisionStrategyFactory {
                 return new AddLifeStrategy(gameObjects, imageReader, brickPosition, windowDimensions,
                         livesCounter, graphicLifeCounter);
             case 5:
-                return new powerUpStrategy(gameObjects,this, powerUpCounter);
+                return new powerUpStrategy(gameObjects, this, brickPosition, powerUpCounter);
         }
         return new BasicCollisionStrategy(gameObjects);
     }

@@ -31,8 +31,12 @@ public class AddLifeStrategy extends BasicCollisionStrategy{
         this.graphicLifeCounter = graphicLifeCounter;
     }
     @Override
-    public void onCollision(GameObject collidedObj, GameObject colliderObj, Counter bricksCounter) {
-        super.onCollision(collidedObj, colliderObj, bricksCounter);
+    public void onCollision(GameObject collidedObj, GameObject colliderObj, Counter bricksCounter, boolean remove) {
+        if (remove) {
+            super.onCollision(collidedObj, colliderObj, bricksCounter, false);
+        }
+        System.out.printf("Addlife position %s\n", this.position.toString());
+
         createHeart();
     }
 

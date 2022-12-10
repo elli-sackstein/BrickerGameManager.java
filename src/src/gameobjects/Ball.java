@@ -40,7 +40,7 @@ public class Ball extends GameObject {
         this.collisionSound = collisionSound;
         this.mainBall = mainBall;
         this.gameManager = gameManager;
-        setCenter(position);
+            setCenter(position);
         collisionsCounter = new Counter(0);
     }
 

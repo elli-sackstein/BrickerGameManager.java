@@ -25,8 +25,10 @@ public class CameraStrategy extends BasicCollisionStrategy{
     }
 
     @Override
-    public void onCollision(GameObject collidedObj, GameObject colliderObj, Counter bricksCounter) {
-        super.onCollision(collidedObj, colliderObj, bricksCounter);
+    public void onCollision(GameObject collidedObj, GameObject colliderObj, Counter bricksCounter, boolean remove) {
+        if (remove) {
+            super.onCollision(collidedObj, colliderObj, bricksCounter, false);
+        }
         if ((gameManager.getCamera() == null) && (colliderObj instanceof Ball)){
             gameManager.setCamera(new Camera(ball, Vector2.ZERO,
                     windowController.getWindowDimensions().mult(1.2f),

@@ -13,7 +13,7 @@ public class BasicCollisionStrategy implements CollisionStrategy {
     }
 
     @Override
-    public void onCollision(GameObject collidedObj, GameObject colliderObj, Counter bricksCounter){
+    public void onCollision(GameObject collidedObj, GameObject colliderObj, Counter bricksCounter, boolean remove) {
         gameObjects.removeGameObject(collidedObj, Layer.STATIC_OBJECTS);
         bricksCounter.decrement();
     }

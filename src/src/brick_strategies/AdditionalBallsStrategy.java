@@ -36,8 +36,10 @@ public class AdditionalBallsStrategy extends BasicCollisionStrategy {
     }
 
     @Override
-    public void onCollision(GameObject collidedObj, GameObject colliderObj, Counter bricksCounter) {
-        super.onCollision(collidedObj, colliderObj, bricksCounter);
+    public void onCollision(GameObject collidedObj, GameObject colliderObj, Counter bricksCounter, boolean remove) {
+        if (remove) {
+            super.onCollision(collidedObj, colliderObj, bricksCounter, false);
+        }
         for (int i = 0; i < 3; i++) {
             createBall(i);
         }
