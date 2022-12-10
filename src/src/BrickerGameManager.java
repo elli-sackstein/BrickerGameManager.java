@@ -44,7 +44,6 @@ public class BrickerGameManager extends GameManager {
     private Counter gamesCounter;
     private Counter brickCounter;
     private Counter paddlesCounter;
-    private CollisionStrategy strategy;
     private final CollisionStrategyFactory collisionStrategyFactory;
     private GraphicLifeCounter graphicLifeCounter;
 
@@ -126,7 +125,7 @@ public class BrickerGameManager extends GameManager {
     }
 
     private Brick createSingleBrick(ImageReader imageReader, Vector2 brickDimensions, Vector2 brickPosition) {
-        strategy = collisionStrategyFactory.create(gameObjects(), brickDimensions, brickPosition, imageReader,
+        CollisionStrategy strategy = collisionStrategyFactory.create(gameObjects(), brickDimensions, brickPosition, imageReader,
             soundReader, inputListener, windowDimensions, paddlesCounter,
             gamesCounter, graphicLifeCounter, this, ball, windowController);
 
@@ -151,8 +150,7 @@ public class BrickerGameManager extends GameManager {
             windowDimensions.mult(HALF),
             ballImage,
             collisionSound,
-            true,
-            this
+            true
         );
 
         gameObjects().addGameObject(ball);
@@ -216,10 +214,10 @@ public class BrickerGameManager extends GameManager {
     private void checkForGameEnd() {
 
         String prompt = PROMPT;
-        if (brickCounter.value() == ZERO) {
+        if (brickCounter.value() <= ZERO) {
             prompt = YOU_WIN;
         }
-        if (gamesCounter.value() == ZERO) {
+        if (gamesCounter.value() <= ZERO) {
             prompt = YOU_LOSE;
         }
         if (inputListener.isKeyPressed(KeyEvent.VK_W)) {

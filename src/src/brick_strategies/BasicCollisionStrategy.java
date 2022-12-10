@@ -6,10 +6,6 @@ import danogl.collisions.Layer;
 import danogl.util.Counter;
 
 public class BasicCollisionStrategy implements CollisionStrategy {
-
-    public BasicCollisionStrategy(){
-    }
-
     @Override
     public void onCollision(GameObject collidedObj, GameObject colliderObj, Counter bricksCounter) {
     }

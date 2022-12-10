@@ -40,10 +40,10 @@ public class Brick extends GameObject {
     @Override
     public void onCollisionEnter(GameObject other, Collision collision) {
         super.onCollisionEnter(other, collision);
-        strategy.onCollision(this, other, counter);
-        counter.decrement();
 
         gameObjects.removeGameObject(this, Layer.STATIC_OBJECTS);
-        System.out.println(counter.value());
+        counter.decrement();
+
+        strategy.onCollision(this, other, counter);
     }
 }

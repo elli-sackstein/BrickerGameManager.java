@@ -28,13 +28,12 @@ public class Ball extends GameObject {
      * @param collisionSound The collision sound.
      */
     public Ball(
-            Vector2 topLeftCorner,
-            Vector2 dimensions,
-            Vector2 position,
-            Renderable renderable,
-            Sound collisionSound,
-            Boolean mainBall,
-            GameManager gameManager) {
+        Vector2 topLeftCorner,
+        Vector2 dimensions,
+        Vector2 position,
+        Renderable renderable,
+        Sound collisionSound,
+        Boolean mainBall) {
         super(topLeftCorner, dimensions, renderable);
         this.collisionSound = collisionSound;
         this.mainBall = mainBall;

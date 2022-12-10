@@ -6,7 +6,6 @@ import danogl.collisions.*;
 import danogl.gui.ImageReader;
 import danogl.gui.Sound;
 import danogl.gui.SoundReader;
-import danogl.gui.WindowController;
 import danogl.gui.rendering.Renderable;
 import danogl.util.Counter;
 import danogl.util.Vector2;
@@ -55,8 +54,7 @@ public class AdditionalBallsStrategy implements CollisionStrategy {
                 new Vector2(posX, posY),
                 ballImage,
                 collisionSound,
-                false,
-                gameManager
+                false
         );
         // TODO:why not in the constructor?
         ball.setRandomVelocity();
