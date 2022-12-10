@@ -27,10 +27,7 @@ public class CameraStrategy implements CollisionStrategy{
 
     @Override
     public void onCollision(GameObject collidedObj, GameObject colliderObj, Counter bricksCounter, boolean remove) {
-        if (remove) {
-            gameObjects.removeGameObject(collidedObj, Layer.STATIC_OBJECTS);
-            bricksCounter.decrement();
-        }
+
         if ((gameManager.getCamera() == null) && (colliderObj instanceof Ball)){
             gameManager.setCamera(new Camera(ball, Vector2.ZERO,
                     windowController.getWindowDimensions().mult(1.2f),

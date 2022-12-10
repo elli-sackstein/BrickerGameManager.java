@@ -33,10 +33,6 @@ public class AddLifeStrategy implements CollisionStrategy{
     }
     @Override
     public void onCollision(GameObject collidedObj, GameObject colliderObj, Counter bricksCounter, boolean remove) {
-        if (remove) {
-            gameObjects.removeGameObject(collidedObj, Layer.STATIC_OBJECTS);
-            bricksCounter.decrement();
-        }
         createHeart();
     }
 

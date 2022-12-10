@@ -6,15 +6,11 @@ import danogl.collisions.Layer;
 import danogl.util.Counter;
 
 public class BasicCollisionStrategy implements CollisionStrategy {
-    private final GameObjectCollection gameObjects;
 
-    public BasicCollisionStrategy(GameObjectCollection gameObjects){
-        this.gameObjects = gameObjects;
+    public BasicCollisionStrategy(){
     }
 
     @Override
     public void onCollision(GameObject collidedObj, GameObject colliderObj, Counter bricksCounter, boolean remove) {
-        gameObjects.removeGameObject(collidedObj, Layer.STATIC_OBJECTS);
-        bricksCounter.decrement();
     }
 }

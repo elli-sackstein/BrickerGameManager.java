@@ -7,14 +7,12 @@ import danogl.util.*;
 public class PowerUpStrategy implements CollisionStrategy{
     private Vector2 brickPosition;
     private Counter powerUpCounter;
-    private GameObjectCollection gameObjects;
     private CollisionStrategyFactory factory;
     private CollisionStrategy[] strategies;
     private int strategiesIndex;
 
-    public PowerUpStrategy(GameObjectCollection gameObjects, CollisionStrategyFactory factory,
+    public PowerUpStrategy(CollisionStrategyFactory factory,
                            Vector2 brickPosition, Counter powerUpCounter) {
-        this.gameObjects = gameObjects;
         this.factory = factory;
         this.brickPosition = brickPosition;
         this.powerUpCounter = powerUpCounter;
@@ -28,8 +26,6 @@ public class PowerUpStrategy implements CollisionStrategy{
         for (int i = 0; i < strategies.length; i++) {
             strategies[i].onCollision(collidedObj, colliderObj, bricksCounter, i == strategies.length - 1);
         }
-        gameObjects.removeGameObject(collidedObj, Layer.STATIC_OBJECTS);
-        bricksCounter.decrement();
     }
 
     private void createCollisionArray() {

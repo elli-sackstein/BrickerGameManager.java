@@ -38,10 +38,6 @@ public class AdditionalBallsStrategy implements CollisionStrategy {
 
     @Override
     public void onCollision(GameObject collidedObj, GameObject colliderObj, Counter bricksCounter, boolean remove) {
-        if (remove) {
-            gameObjects.removeGameObject(collidedObj, Layer.STATIC_OBJECTS);
-            bricksCounter.decrement();
-        }
         for (int i = 0; i < 3; i++) {
             createBall(i);
         }

@@ -56,7 +56,7 @@ public class CollisionStrategyFactory {
     public CollisionStrategy chooseStrategy(int strategyIndex, Vector2 brickPosition){
         switch (strategyIndex){
             case 0:
-                return new BasicCollisionStrategy(gameObjects);
+                return new BasicCollisionStrategy();
             case 1:
                 return new AdditionalBallsStrategy(gameObjects, brickDimensions, brickPosition, imageReader,
                         soundReader, gameManager);
@@ -69,9 +69,9 @@ public class CollisionStrategyFactory {
                 return new AddLifeStrategy(gameObjects, imageReader, brickPosition, windowDimensions,
                         livesCounter, graphicLifeCounter);
             case 5:
-                return new PowerUpStrategy(gameObjects, this, brickPosition, powerUpCounter);
+                return new PowerUpStrategy(this, brickPosition, powerUpCounter);
         }
-        return new BasicCollisionStrategy(gameObjects);
+        return new BasicCollisionStrategy();
     }
 
     public int getRandomNumberUsingNextInt(int min, int max) {

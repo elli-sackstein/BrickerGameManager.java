@@ -141,7 +141,7 @@ public class BrickerGameManager extends GameManager {
 
         Renderable brickImage = imageReader.readImage(ASSETS_BRICK_PNG, false);
         var brick = new Brick(Vector2.ZERO, brickDimensions,
-                brickImage, strategy, brickCounter);
+                brickImage, strategy, gameObjects(), brickCounter);
         brick.setCenter(brickPosition);
 
         return brick;
