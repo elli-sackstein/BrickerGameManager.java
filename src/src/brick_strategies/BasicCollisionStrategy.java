@@ -6,7 +6,7 @@ import danogl.collisions.Layer;
 import danogl.util.Counter;
 
 public class BasicCollisionStrategy implements CollisionStrategy {
-    protected final GameObjectCollection gameObjects;
+    private final GameObjectCollection gameObjects;
 
     public BasicCollisionStrategy(GameObjectCollection gameObjects){
         this.gameObjects = gameObjects;

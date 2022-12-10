@@ -9,13 +9,14 @@ import src.gameobjects.*;
 
 import static src.BrickerGameManager.ASSETS_BLOP_WAV;
 
-public class AdditionalDiskStrategy extends BasicCollisionStrategy {
+public class AdditionalDiskStrategy implements CollisionStrategy {
     // ====================== constants ======================
     public static final String DISK_PNG = "assets/botGood.png";
     private static final int PADDLE_HEIGHT = 20;
     private static final int PADDLE_WIDTH = 100;
     public static final int MIN_DIST_FROM_EDGE = 15;
     public static final int TWO = 2;
+    private GameObjectCollection gameObjects;
     // ====================== fields ======================
     private final Vector2 brickDimensions;
     private final ImageReader imageReader;
@@ -29,7 +30,7 @@ public class AdditionalDiskStrategy extends BasicCollisionStrategy {
             GameObjectCollection gameObjects, Vector2 brickDimensions, ImageReader imageReader,
             UserInputListener inputListener, Vector2 windowDimensions, Counter paddlesCounter,
             Counter collisionsCounter) {
-        super(gameObjects);
+        this.gameObjects = gameObjects;
         this.brickDimensions = brickDimensions;
         this.imageReader = imageReader;
         this.inputListener = inputListener;
@@ -41,7 +42,8 @@ public class AdditionalDiskStrategy extends BasicCollisionStrategy {
     @Override
     public void onCollision(GameObject collidedObj, GameObject colliderObj, Counter bricksCounter, boolean remove) {
         if (remove) {
-            super.onCollision(collidedObj, colliderObj, bricksCounter, false);
+            gameObjects.removeGameObject(collidedObj, Layer.STATIC_OBJECTS);
+            bricksCounter.decrement();
         }
         if (paddlesCounter.value() == 0){
             createPaddle();

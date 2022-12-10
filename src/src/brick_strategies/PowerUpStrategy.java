@@ -1,18 +1,20 @@
 package src.brick_strategies;
 
 import danogl.GameObject;
-import danogl.collisions.GameObjectCollection;
+import danogl.collisions.*;
 import danogl.util.*;
 
-public class powerUpStrategy extends BasicCollisionStrategy{
+public class PowerUpStrategy implements CollisionStrategy{
     private Vector2 brickPosition;
     private Counter powerUpCounter;
+    private GameObjectCollection gameObjects;
     private CollisionStrategyFactory factory;
     private CollisionStrategy[] strategies;
     private int strategiesIndex;
-    public powerUpStrategy(GameObjectCollection gameObjects, CollisionStrategyFactory factory,
+
+    public PowerUpStrategy(GameObjectCollection gameObjects, CollisionStrategyFactory factory,
                            Vector2 brickPosition, Counter powerUpCounter) {
-        super(gameObjects);
+        this.gameObjects = gameObjects;
         this.factory = factory;
         this.brickPosition = brickPosition;
         this.powerUpCounter = powerUpCounter;
@@ -26,8 +28,8 @@ public class powerUpStrategy extends BasicCollisionStrategy{
         for (int i = 0; i < strategies.length; i++) {
             strategies[i].onCollision(collidedObj, colliderObj, bricksCounter, i == strategies.length - 1);
         }
-        // the counter decreases 3 times instead of 1
-        bricksCounter.increaseBy(2);
+        gameObjects.removeGameObject(collidedObj, Layer.STATIC_OBJECTS);
+        bricksCounter.decrement();
     }
 
     private void createCollisionArray() {

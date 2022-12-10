@@ -12,8 +12,9 @@ import src.gameobjects.Heart;
 
 import static src.BrickerGameManager.WIDGET_SIZE;
 
-public class AddLifeStrategy extends BasicCollisionStrategy{
+public class AddLifeStrategy implements CollisionStrategy{
     public static final String ASSETS_HEART_PNG = "assets/heart.png";
+    private GameObjectCollection gameObjects;
     private final ImageReader imageReader;
     private final Vector2 position;
     private final Vector2 windowDimensions;
@@ -23,7 +24,7 @@ public class AddLifeStrategy extends BasicCollisionStrategy{
     public AddLifeStrategy(GameObjectCollection gameObjects, ImageReader imageReader, Vector2 position,
                            Vector2 windowDimensions, Counter livesCounter,
                            GraphicLifeCounter graphicLifeCounter) {
-        super(gameObjects);
+        this.gameObjects = gameObjects;
         this.imageReader = imageReader;
         this.position = position;
         this.windowDimensions = windowDimensions;
@@ -33,7 +34,8 @@ public class AddLifeStrategy extends BasicCollisionStrategy{
     @Override
     public void onCollision(GameObject collidedObj, GameObject colliderObj, Counter bricksCounter, boolean remove) {
         if (remove) {
-            super.onCollision(collidedObj, colliderObj, bricksCounter, false);
+            gameObjects.removeGameObject(collidedObj, Layer.STATIC_OBJECTS);
+            bricksCounter.decrement();
         }
         createHeart();
     }

@@ -69,7 +69,7 @@ public class CollisionStrategyFactory {
                 return new AddLifeStrategy(gameObjects, imageReader, brickPosition, windowDimensions,
                         livesCounter, graphicLifeCounter);
             case 5:
-                return new powerUpStrategy(gameObjects, this, brickPosition, powerUpCounter);
+                return new PowerUpStrategy(gameObjects, this, brickPosition, powerUpCounter);
         }
         return new BasicCollisionStrategy(gameObjects);
     }
