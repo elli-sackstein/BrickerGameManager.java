@@ -30,20 +30,20 @@ public class powerUpStrategy extends BasicCollisionStrategy{
     }
 
     private void createCollisionArray() {
-        if (powerUpCounter.value() == 1){
-            CollisionStrategy strategy = factory.chooseStrategy(0,4);
-            strategies[strategiesIndex] = strategy;
-            return;
-        }
-        else{
-            CollisionStrategy strategy = factory.chooseStrategy(1,5);
-            if (strategy.getClass() != this.getClass()){
+        while (powerUpCounter.value() > 0) {
+            if (powerUpCounter.value() == 1) {
+                CollisionStrategy strategy = factory.chooseStrategy(0, 4);
                 strategies[strategiesIndex] = strategy;
-                strategiesIndex ++;
+            } else {
+                CollisionStrategy strategy = factory.chooseStrategy(1, 5);
+                if (strategy.getClass() != this.getClass()) {
+                    strategies[strategiesIndex] = strategy;
+                    strategiesIndex++;
+                } else {
+                    System.out.println();
+                }
             }
             powerUpCounter.decrement();
-            createCollisionArray();
         }
-
     }
 }
