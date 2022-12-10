@@ -149,8 +149,7 @@ public class BrickerGameManager extends GameManager {
             new Vector2(BALL_RADIUS, BALL_RADIUS),
             windowDimensions.mult(HALF),
             ballImage,
-            collisionSound,
-            true
+            collisionSound
         );
 
         gameObjects().addGameObject(mainBall);

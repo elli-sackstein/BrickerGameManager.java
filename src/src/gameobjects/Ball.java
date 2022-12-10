@@ -16,15 +16,15 @@ public class Ball extends GameObject {
     private static final int OPPOSITE_DIRECTION = -1;
 
     private final Sound collisionSound;
-    private final Boolean mainBall;
     private final Counter collisionsCounter;
 
     /**
      * Construct a new GameObject instance.
-     *  @param topLeftCorner Position of the object, in window coordinates (pixels).
-     *                      Note that (0,0) is the top-left corner of the window.
-     * @param dimensions    Width and height in window coordinates.
-     * @param renderable    The renderable representing the object. Can be null, in which case
+     *
+     * @param topLeftCorner  Position of the object, in window coordinates (pixels).
+     *                       Note that (0,0) is the top-left corner of the window.
+     * @param dimensions     Width and height in window coordinates.
+     * @param renderable     The renderable representing the object. Can be null, in which case
      * @param collisionSound The collision sound.
      */
     public Ball(
@@ -32,11 +32,9 @@ public class Ball extends GameObject {
         Vector2 dimensions,
         Vector2 position,
         Renderable renderable,
-        Sound collisionSound,
-        Boolean mainBall) {
+        Sound collisionSound) {
         super(topLeftCorner, dimensions, renderable);
         this.collisionSound = collisionSound;
-        this.mainBall = mainBall;
         setCenter(position);
         collisionsCounter = new Counter(0);
     }
@@ -47,12 +45,10 @@ public class Ball extends GameObject {
         Vector2 newVel = getVelocity().flipped(collision.getNormal());
         setVelocity(newVel);
         collisionSound.play();
-        if (mainBall){
-            collisionsCounter.increment();
-        }
+        collisionsCounter.increment();
     }
 
-    public void setRandomVelocity(){
+    public void setRandomVelocity() {
         float ballVelX = BALL_SPEED;
         float ballVelY = BALL_SPEED;
         Random rand = new Random();
@@ -63,7 +59,7 @@ public class Ball extends GameObject {
         setVelocity(new Vector2(ballVelX, ballVelY));
     }
 
-    public Counter getCollisionCounter(){
+    public Counter getCollisionCounter() {
         return collisionsCounter;
     }
 }

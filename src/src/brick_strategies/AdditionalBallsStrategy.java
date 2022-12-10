@@ -1,6 +1,5 @@
 package src.brick_strategies;
 
-import danogl.GameManager;
 import danogl.GameObject;
 import danogl.collisions.*;
 import danogl.gui.ImageReader;
@@ -50,8 +49,7 @@ public class AdditionalBallsStrategy implements CollisionStrategy {
                 new Vector2(radius, radius),
                 new Vector2(posX, posY),
                 ballImage,
-                collisionSound,
-                false
+                collisionSound
         );
         // TODO:why not in the constructor?
         ball.setRandomVelocity();

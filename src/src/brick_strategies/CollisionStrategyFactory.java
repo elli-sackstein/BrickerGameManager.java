@@ -24,7 +24,7 @@ public class CollisionStrategyFactory {
     private Counter livesCounter;
     private GraphicLifeCounter graphicLifeCounter;
     private GameManager gameManager;
-    private Ball ball;
+    private Ball mainBall;
     private WindowController windowController;
 
     public CollisionStrategy create(
@@ -32,7 +32,7 @@ public class CollisionStrategyFactory {
         Vector2 brickPosition, ImageReader imageReader, SoundReader soundReader,
         UserInputListener inputListener, Vector2 windowDimensions, Counter paddlesCounter,
         Counter livesCounter, GraphicLifeCounter graphicLifeCounter,
-        GameManager gameManager, Ball ball, WindowController windowController) {
+        GameManager gameManager, Ball mainBall, WindowController windowController) {
 
         this.gameObjects = gameObjects;
         this.brickDimensions = brickDimensions;
@@ -44,7 +44,7 @@ public class CollisionStrategyFactory {
         this.livesCounter = livesCounter;
         this.graphicLifeCounter = graphicLifeCounter;
         this.gameManager = gameManager;
-        this.ball = ball;
+        this.mainBall = mainBall;
         this.windowController = windowController;
         powerUpCounter = new Counter(3);
         int rand = getRandomNumberUsingNextInt(0, NUM_OF_STRATEGY);
@@ -62,7 +62,7 @@ public class CollisionStrategyFactory {
                 return new AdditionalDiskStrategy(gameObjects, brickDimensions, imageReader, inputListener,
                         windowDimensions, paddlesCounter);
             case 3:
-                return new CameraStrategy(gameObjects, gameManager, ball, windowController);
+                return new CameraStrategy(gameObjects, gameManager, mainBall, windowController);
             case 4:
                 return new AddLifeStrategy(gameObjects, imageReader, brickPosition, windowDimensions,
                         livesCounter, graphicLifeCounter);
