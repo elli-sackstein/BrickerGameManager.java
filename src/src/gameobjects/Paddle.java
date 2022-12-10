@@ -2,11 +2,8 @@ package src.gameobjects;
 
 import danogl.GameObject;
 import danogl.collisions.Collision;
-import danogl.collisions.GameObjectCollection;
-import danogl.collisions.Layer;
 import danogl.gui.UserInputListener;
 import danogl.gui.rendering.Renderable;
-import danogl.util.Counter;
 import danogl.util.Vector2;
 
 import java.awt.event.KeyEvent;
@@ -17,9 +14,6 @@ public class Paddle extends GameObject {
     private final UserInputListener inputListener;
     private final Vector2 windowDimensions;
     private final int minDistFromEdge;
-    private final Counter counter;
-    private final GameObjectCollection gameObjects;
-    private final Boolean mainPaddle;
 
     /**
      * Construct a new GameObject instance.
@@ -36,16 +30,11 @@ public class Paddle extends GameObject {
                   Renderable renderable,
                   UserInputListener inputListener,
                   Vector2 windowDimensions,
-                  int minDistFromEdge,
-                  GameObjectCollection gameObjects,
-                  Boolean mainPaddle) {
+                  int minDistFromEdge) {
         super(topLeftCorner, dimensions, renderable);
         this.inputListener = inputListener;
         this.windowDimensions = windowDimensions;
         this.minDistFromEdge = minDistFromEdge;
-        this.counter = new Counter(0);
-        this.gameObjects = gameObjects;
-        this.mainPaddle = mainPaddle;
     }
 
     @Override
@@ -73,13 +62,5 @@ public class Paddle extends GameObject {
     @Override
     public void onCollisionEnter(GameObject other, Collision collision) {
         super.onCollisionEnter(other, collision);
-        counter.increment();
-        if ((!mainPaddle) && (counter.value() == 3)){
-            gameObjects.removeGameObject(this, Layer.STATIC_OBJECTS);
-        }
-    }
-
-    boolean isMainPaddle(){
-        return mainPaddle;
     }
 }

@@ -10,10 +10,9 @@ import danogl.util.Vector2;
 public class Heart extends GameObject {
     private static final float HEART_SPEED = 100;
 
-    private Vector2 windowDimensions;
-    private GameObjectCollection gameObjects;
-    private Counter livesCounter;
-    private GraphicLifeCounter graphicLifeCounter;
+    private final Vector2 windowDimensions;
+    private final GameObjectCollection gameObjects;
+    private final GraphicLifeCounter graphicLifeCounter;
 
 
     /**
@@ -26,12 +25,11 @@ public class Heart extends GameObject {
      *                      the GameObject will not be rendered.
      */
     public Heart(Vector2 topLeftCorner, Vector2 dimensions, Renderable renderable, Vector2 position,
-                 Vector2 windowDimensions, GameObjectCollection gameObjects, Counter livesCounter,
+                 Vector2 windowDimensions, GameObjectCollection gameObjects,
                  GraphicLifeCounter graphicLifeCounter) {
         super(topLeftCorner, dimensions, renderable);
         this.windowDimensions = windowDimensions;
         this.gameObjects = gameObjects;
-        this.livesCounter = livesCounter;
         this.graphicLifeCounter = graphicLifeCounter;
         setCenter(position);
         setVelocity(new Vector2(0, HEART_SPEED));
@@ -46,19 +44,11 @@ public class Heart extends GameObject {
     }
     @Override
     public boolean shouldCollideWith(GameObject other) {
-        //TODO: is this code ok?
-        return ((other instanceof Paddle) && (((Paddle) other).isMainPaddle()));
+        return other instanceof Paddle && !(other instanceof AdditionalPaddle);
     }
     @Override
     public void onCollisionEnter(GameObject other, Collision collision) {
         super.onCollisionEnter(other, collision);
-        // TODO: who should handle livesCounter? heart? graphic?
-        if (livesCounter.value() < 4){
-            livesCounter.increment();
-            setVelocity(Vector2.ZERO);
-            gameObjects.removeGameObject(this);
-            graphicLifeCounter.placeCollectedHeart();
-        }
+        graphicLifeCounter.onHeartCollision(this);
     }
-
 }

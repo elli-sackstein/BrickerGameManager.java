@@ -55,18 +55,6 @@ public class GraphicLifeCounter extends GameObject {
             gameObjectsCollection.addGameObject(gameObjects[i], Layer.UI);
         }
     }
-    public void placeCollectedHeart(){
-        GameObject heart = new GameObject(
-                widgetTopLeftCorner, new Vector2(Constants.WIDGET_SIZE, Constants.WIDGET_SIZE), widgetRenderable);
-        gameObjects[livesCounter.value()-1] = heart;
-        heart.setCenter(new Vector2(objLocationX + numOfLives * Constants.WIDGET_SIZE, objLocationY));
-        gameObjectsCollection.addGameObject(heart, Layer.UI);
-        numOfLives++;
-    }
-    private void createGameObjectsArray(int numOfLives) {
-        // creates the private array of hearts
-        gameObjects = new GameObject[numOfLives];
-    }
 
     @Override
     public void update(float deltaTime) {
@@ -78,5 +66,28 @@ public class GraphicLifeCounter extends GameObject {
             gameObjectsCollection.removeGameObject(gameObjects[lastIndex], Layer.UI);
             numOfLives--;
         }
+    }
+
+    public void onHeartCollision(Heart heart){
+        if (livesCounter.value() < 4){
+            livesCounter.increment();
+            heart.setVelocity(Vector2.ZERO);
+            gameObjectsCollection.removeGameObject(heart);
+            placeCollectedHeart();
+        }
+    }
+
+    private void placeCollectedHeart(){
+        GameObject heart = new GameObject(
+            widgetTopLeftCorner, new Vector2(Constants.WIDGET_SIZE, Constants.WIDGET_SIZE), widgetRenderable);
+        gameObjects[livesCounter.value()-1] = heart;
+        heart.setCenter(new Vector2(objLocationX + numOfLives * Constants.WIDGET_SIZE, objLocationY));
+        gameObjectsCollection.addGameObject(heart, Layer.UI);
+        numOfLives++;
+    }
+
+    private void createGameObjectsArray(int numOfLives) {
+        // creates the private array of hearts
+        gameObjects = new GameObject[numOfLives];
     }
 }

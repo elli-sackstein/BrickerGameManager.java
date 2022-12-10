@@ -40,7 +40,7 @@ public class AddLifeStrategy implements CollisionStrategy {
             new Vector2(Constants.WIDGET_SIZE, Constants.WIDGET_SIZE),
             lifeImage,
             position,
-            windowDimensions, gameObjects, livesCounter, graphicLifeCounter);
+            windowDimensions, gameObjects, graphicLifeCounter);
         gameObjects.addGameObject(heart);
     }
 

@@ -38,8 +38,11 @@ public class AdditionalDiskStrategy implements CollisionStrategy {
 
     private void createPaddle() {
         Renderable paddleImage = imageReader.readImage(Constants.DISK_PNG, false);
-        Paddle paddle = new Paddle(Vector2.ZERO, brickDimensions, paddleImage, inputListener, windowDimensions,
-            Constants.MIN_DIST_FROM_EDGE, gameObjects, false);
+        Paddle paddle = new AdditionalPaddle(
+            Vector2.ZERO,
+            brickDimensions, paddleImage, inputListener, windowDimensions,
+            Constants.MIN_DIST_FROM_EDGE,
+            gameObjects);
 
         paddle.setCenter(new Vector2(
                 windowDimensions.x() / 2, (int) (windowDimensions.y() / 2)));

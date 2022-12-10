@@ -73,13 +73,14 @@ public class BrickerGameManager extends GameManager {
         //create background
         createBackground(imageReader);
 
-        //create ball
-        createBall(imageReader, soundReader, windowController);
+        //create main ball
+        createMainBall(imageReader, soundReader, windowController);
 
-        //create paddle
+        //create main paddle
         Renderable paddleImage = imageReader.readImage(
             Constants.ASSETS_PADDLE_PNG, false);
-        createPaddle(paddleImage, inputListener, windowDimensions);
+
+        createMainPaddle(paddleImage, inputListener, windowDimensions);
 
         //create borders
         createBorders(windowDimensions);
@@ -137,7 +138,7 @@ public class BrickerGameManager extends GameManager {
         return brick;
     }
 
-    private void createBall(
+    private void createMainBall(
         ImageReader imageReader, SoundReader soundReader, WindowController windowController) {
         Renderable ballImage =
             imageReader.readImage(Constants.ASSETS_BALL_PNG, true);
@@ -157,7 +158,7 @@ public class BrickerGameManager extends GameManager {
         mainBall.setRandomVelocity();
     }
 
-    private void createPaddle(
+    private void createMainPaddle(
         Renderable paddleImage, UserInputListener inputListener, Vector2 windowDimensions) {
         GameObject Paddle = new Paddle(
             Vector2.ZERO,
@@ -165,9 +166,7 @@ public class BrickerGameManager extends GameManager {
             paddleImage,
             inputListener,
             windowDimensions,
-            Constants.MIN_DIST_FROM_EDGE,
-            gameObjects(),
-            true);
+            Constants.MIN_DIST_FROM_EDGE);
 
         Paddle.setCenter(new Vector2(
             windowDimensions.x() / TWO,
