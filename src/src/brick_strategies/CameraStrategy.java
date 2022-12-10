@@ -12,10 +12,10 @@ import src.gameobjects.BallCollisionCounter;
 
 public class CameraStrategy implements CollisionStrategy{
 
-    private GameObjectCollection gameObjects;
-    private GameManager gameManager;
-    private Ball ball;
-    private WindowController windowController;
+    private final GameObjectCollection gameObjects;
+    private final GameManager gameManager;
+    private final Ball ball;
+    private final WindowController windowController;
 
     public CameraStrategy(GameObjectCollection gameObjects, GameManager gameManager, Ball ball,
                           WindowController windowController) {

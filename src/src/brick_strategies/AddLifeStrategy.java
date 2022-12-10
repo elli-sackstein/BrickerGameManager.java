@@ -14,12 +14,12 @@ import static src.BrickerGameManager.WIDGET_SIZE;
 
 public class AddLifeStrategy implements CollisionStrategy{
     public static final String ASSETS_HEART_PNG = "assets/heart.png";
-    private GameObjectCollection gameObjects;
+    private final GameObjectCollection gameObjects;
     private final ImageReader imageReader;
     private final Vector2 position;
     private final Vector2 windowDimensions;
-    private Counter livesCounter;
-    private GraphicLifeCounter graphicLifeCounter;
+    private final Counter livesCounter;
+    private final GraphicLifeCounter graphicLifeCounter;
 
     public AddLifeStrategy(GameObjectCollection gameObjects, ImageReader imageReader, Vector2 position,
                            Vector2 windowDimensions, Counter livesCounter,

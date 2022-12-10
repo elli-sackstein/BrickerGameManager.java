@@ -136,8 +136,8 @@ public class BrickerGameManager extends GameManager {
 
     private Brick createSingleBrick(ImageReader imageReader, Vector2 brickDimensions, Vector2 brickPosition) {
         strategy = collisionStrategyFactory.create(gameObjects(), brickDimensions, brickPosition, imageReader,
-                soundReader, inputListener, windowDimensions, paddlesCounter, collisionsCounter,
-                gamesCounter, graphicLifeCounter, this, ball, windowController);
+                soundReader, inputListener, windowDimensions, paddlesCounter,
+            gamesCounter, graphicLifeCounter, this, ball, windowController);
 
         Renderable brickImage = imageReader.readImage(ASSETS_BRICK_PNG, false);
         var brick = new Brick(Vector2.ZERO, brickDimensions,

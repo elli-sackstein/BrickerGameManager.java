@@ -23,7 +23,7 @@ public class AdditionalBallsStrategy implements CollisionStrategy {
     private final Vector2 brickPosition;
     private final ImageReader imageReader;
     private final SoundReader soundReader;
-    private GameManager gameManager;
+    private final GameManager gameManager;
 
     public AdditionalBallsStrategy(GameObjectCollection gameObjects, Vector2 brickDimensions,
                                    Vector2 brickPosition, ImageReader imageReader, SoundReader soundReader,
