@@ -37,7 +37,7 @@ public class BrickerGameManager extends GameManager {
     private static final int WINDOW_HEIGHT = 500;
     // ====================== private fields ======================
     private UserInputListener inputListener;
-    private Ball ball;
+    private Ball mainBall;
     private Vector2 windowDimensions;
     private WindowController windowController;
     private SoundReader soundReader;
@@ -127,7 +127,7 @@ public class BrickerGameManager extends GameManager {
     private Brick createSingleBrick(ImageReader imageReader, Vector2 brickDimensions, Vector2 brickPosition) {
         CollisionStrategy strategy = collisionStrategyFactory.create(gameObjects(), brickDimensions, brickPosition, imageReader,
             soundReader, inputListener, windowDimensions, paddlesCounter,
-            gamesCounter, graphicLifeCounter, this, ball, windowController);
+            gamesCounter, graphicLifeCounter, this, mainBall, windowController);
 
         Renderable brickImage = imageReader.readImage(Constants.ASSETS_BRICK_PNG, false);
         var brick = new Brick(Vector2.ZERO, brickDimensions,
@@ -144,7 +144,7 @@ public class BrickerGameManager extends GameManager {
         Sound collisionSound = soundReader.readSound(Constants.ASSETS_BLOP_WAV);
         Vector2 windowDimensions = windowController.getWindowDimensions();
 
-        ball = new Ball(
+        mainBall = new Ball(
             Vector2.ZERO,
             new Vector2(BALL_RADIUS, BALL_RADIUS),
             windowDimensions.mult(HALF),
@@ -153,9 +153,9 @@ public class BrickerGameManager extends GameManager {
             true
         );
 
-        gameObjects().addGameObject(ball);
+        gameObjects().addGameObject(mainBall);
 
-        ball.setRandomVelocity();
+        mainBall.setRandomVelocity();
     }
 
     private void createPaddle(
@@ -203,10 +203,10 @@ public class BrickerGameManager extends GameManager {
     public void update(float deltaTime) {
 
         super.update(deltaTime);
-        double ballHeight = ball.getCenter().y();
+        double ballHeight = mainBall.getCenter().y();
         if (ballHeight > windowDimensions.y()) {
             gamesCounter.decrement();
-            ball.setCenter(windowDimensions.mult(HALF));
+            mainBall.setCenter(windowDimensions.mult(HALF));
         }
         checkForGameEnd();
     }

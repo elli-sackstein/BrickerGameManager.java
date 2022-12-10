@@ -20,17 +20,14 @@ public class AdditionalBallsStrategy implements CollisionStrategy {
     private final Vector2 brickPosition;
     private final ImageReader imageReader;
     private final SoundReader soundReader;
-    private final GameManager gameManager;
 
     public AdditionalBallsStrategy(GameObjectCollection gameObjects, Vector2 brickDimensions,
-                                   Vector2 brickPosition, ImageReader imageReader, SoundReader soundReader,
-                                   GameManager gameManager) {
+                                   Vector2 brickPosition, ImageReader imageReader, SoundReader soundReader) {
         this.gameObjects = gameObjects;
         this.brickDimensions = brickDimensions;
         this.brickPosition = brickPosition;
         this.imageReader = imageReader;
         this.soundReader = soundReader;
-        this.gameManager = gameManager;
     }
 
     @Override

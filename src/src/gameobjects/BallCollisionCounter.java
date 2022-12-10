@@ -8,9 +8,9 @@ import danogl.util.Counter;
 import danogl.util.Vector2;
 
 public class BallCollisionCounter extends GameObject {
-    private GameManager gameManager;
-    private Counter collisionsCounter;
-    private GameObjectCollection gameObjects;
+    private final GameManager gameManager;
+    private final Counter collisionsCounter;
+    private final GameObjectCollection gameObjects;
 
     /**
      * Construct a new GameObject instance.
@@ -21,21 +21,24 @@ public class BallCollisionCounter extends GameObject {
      * @param renderable    The renderable representing the object. Can be null, in which case
      *                      the GameObject will not be rendered.
      */
-    public BallCollisionCounter(Vector2 topLeftCorner, Vector2 dimensions, Renderable renderable,
-                                GameManager gameManager, Counter collisionsCounter,
-                                GameObjectCollection gameObjects) {
-        super(topLeftCorner, dimensions, renderable);
+    public BallCollisionCounter(
+        Counter collisionsCounter,
+        GameManager gameManager,
+        GameObjectCollection gameObjects) {
+
+        super(Vector2.ZERO, Vector2.ZERO, null);
+
         this.gameManager = gameManager;
         this.collisionsCounter = collisionsCounter;
         this.gameObjects = gameObjects;
+
         collisionsCounter.reset();
     }
 
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
-        //System.out.println(collisionsCounter.value());
-        if (collisionsCounter.value() >= 4){
+        if (collisionsCounter.value() >= 4) {
             gameManager.setCamera(null);
             gameObjects.removeGameObject(this);
         }

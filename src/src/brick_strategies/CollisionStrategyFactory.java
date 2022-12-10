@@ -57,7 +57,7 @@ public class CollisionStrategyFactory {
                 return new BasicCollisionStrategy();
             case 1:
                 return new AdditionalBallsStrategy(gameObjects, brickDimensions, brickPosition, imageReader,
-                        soundReader, gameManager);
+                        soundReader);
             case 2:
                 return new AdditionalDiskStrategy(gameObjects, brickDimensions, imageReader, inputListener,
                         windowDimensions, paddlesCounter);
