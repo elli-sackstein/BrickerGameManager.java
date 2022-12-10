@@ -44,6 +44,7 @@ public class PowerUpStrategy implements CollisionStrategy{
         if (value == 1) {
             return factory.getRandomNumberUsingNextInt(0, 5);
         }
+        // TODO: Add justification
         return factory.getRandomNumberUsingNextInt(1, 5);
     }
 }
