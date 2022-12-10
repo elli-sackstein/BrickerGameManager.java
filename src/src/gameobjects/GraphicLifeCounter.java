@@ -6,12 +6,11 @@ import danogl.collisions.Layer;
 import danogl.gui.rendering.Renderable;
 import danogl.util.Counter;
 import danogl.util.Vector2;
+import src.Constants;
 
 public class GraphicLifeCounter extends GameObject {
+    private static final double HALF = 0.5;
 
-    public static final double HALF = 0.5;
-    public static final int ONE = 1;
-    public static final int WIDGET_SIZE = 30;
     private Vector2 widgetTopLeftCorner;
     private final Counter livesCounter;
     private Renderable widgetRenderable;
@@ -44,23 +43,23 @@ public class GraphicLifeCounter extends GameObject {
         this.numOfLives = numOfLives;
 
         // calculates the center of the first heart
-        objLocationX = (int)(widgetTopLeftCorner.x() + HALF * WIDGET_SIZE);
-        objLocationY = (int)(widgetTopLeftCorner.y() - HALF * WIDGET_SIZE);
+        objLocationX = (int)(widgetTopLeftCorner.x() + HALF * Constants.WIDGET_SIZE);
+        objLocationY = (int)(widgetTopLeftCorner.y() - HALF * Constants.WIDGET_SIZE);
 
         // creates the private array of hearts and places them by their center
         createGameObjectsArray(numOfLives + 1);
         for (int i = 0; i < numOfLives; i++) {
             gameObjects[i] = new GameObject(
-                    widgetTopLeftCorner, new Vector2(WIDGET_SIZE, WIDGET_SIZE), widgetRenderable);
-            gameObjects[i].setCenter(new Vector2(objLocationX + i * WIDGET_SIZE, objLocationY));
+                    widgetTopLeftCorner, new Vector2(Constants.WIDGET_SIZE, Constants.WIDGET_SIZE), widgetRenderable);
+            gameObjects[i].setCenter(new Vector2(objLocationX + i * Constants.WIDGET_SIZE, objLocationY));
             gameObjectsCollection.addGameObject(gameObjects[i], Layer.UI);
         }
     }
     public void placeCollectedHeart(){
         GameObject heart = new GameObject(
-                widgetTopLeftCorner, new Vector2(WIDGET_SIZE, WIDGET_SIZE), widgetRenderable);
+                widgetTopLeftCorner, new Vector2(Constants.WIDGET_SIZE, Constants.WIDGET_SIZE), widgetRenderable);
         gameObjects[livesCounter.value()-1] = heart;
-        heart.setCenter(new Vector2(objLocationX + numOfLives * WIDGET_SIZE, objLocationY));
+        heart.setCenter(new Vector2(objLocationX + numOfLives * Constants.WIDGET_SIZE, objLocationY));
         gameObjectsCollection.addGameObject(heart, Layer.UI);
         numOfLives++;
     }
@@ -72,7 +71,7 @@ public class GraphicLifeCounter extends GameObject {
     @Override
     public void update(float deltaTime) {
         // updates the hearts according to counter
-        int lastIndex = numOfLives - ONE;
+        int lastIndex = numOfLives - 1;
         super.update(deltaTime);
 
         if (livesCounter.value() < numOfLives){

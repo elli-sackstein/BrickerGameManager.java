@@ -8,19 +8,18 @@ import danogl.gui.UserInputListener;
 import danogl.gui.rendering.Renderable;
 import danogl.util.Counter;
 import danogl.util.Vector2;
-import src.brick_strategies.CollisionStrategy;
 
 import java.awt.event.KeyEvent;
 
 public class Paddle extends GameObject {
     private static final int MOVE_SPEED = 500;
+
     private final UserInputListener inputListener;
     private final Vector2 windowDimensions;
     private final int minDistFromEdge;
-    private CollisionStrategy strategy;
-    private Counter counter;
-    private GameObjectCollection gameObjects;
-    private Boolean mainPaddle;
+    private final Counter counter;
+    private final GameObjectCollection gameObjects;
+    private final Boolean mainPaddle;
 
     /**
      * Construct a new GameObject instance.
@@ -35,17 +34,15 @@ public class Paddle extends GameObject {
     public Paddle(Vector2 topLeftCorner,
                   Vector2 dimensions,
                   Renderable renderable,
-                  UserInputListener inputListener ,
+                  UserInputListener inputListener,
                   Vector2 windowDimensions,
                   int minDistFromEdge,
-                  CollisionStrategy strategy,
                   GameObjectCollection gameObjects,
                   Boolean mainPaddle) {
         super(topLeftCorner, dimensions, renderable);
         this.inputListener = inputListener;
         this.windowDimensions = windowDimensions;
         this.minDistFromEdge = minDistFromEdge;
-        this.strategy = strategy;
         this.counter = new Counter(0);
         this.gameObjects = gameObjects;
         this.mainPaddle = mainPaddle;

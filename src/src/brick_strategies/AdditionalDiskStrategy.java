@@ -5,19 +5,12 @@ import danogl.collisions.*;
 import danogl.gui.*;
 import danogl.gui.rendering.Renderable;
 import danogl.util.*;
+import src.Constants;
 import src.gameobjects.*;
 
-import static src.BrickerGameManager.ASSETS_BLOP_WAV;
-
 public class AdditionalDiskStrategy implements CollisionStrategy {
-    // ====================== constants ======================
-    public static final String DISK_PNG = "assets/botGood.png";
-    private static final int PADDLE_HEIGHT = 20;
-    private static final int PADDLE_WIDTH = 100;
-    public static final int MIN_DIST_FROM_EDGE = 15;
-    public static final int TWO = 2;
-    private final GameObjectCollection gameObjects;
     // ====================== fields ======================
+    private final GameObjectCollection gameObjects;
     private final Vector2 brickDimensions;
     private final ImageReader imageReader;
     private final UserInputListener inputListener;
@@ -44,12 +37,12 @@ public class AdditionalDiskStrategy implements CollisionStrategy {
     }
 
     private void createPaddle() {
-        Renderable paddleImage = imageReader.readImage(DISK_PNG, false);
+        Renderable paddleImage = imageReader.readImage(Constants.DISK_PNG, false);
         Paddle paddle = new Paddle(Vector2.ZERO, brickDimensions, paddleImage, inputListener, windowDimensions,
-            MIN_DIST_FROM_EDGE, this, gameObjects, false);
+            Constants.MIN_DIST_FROM_EDGE, gameObjects, false);
 
         paddle.setCenter(new Vector2(
-                windowDimensions.x() / TWO, (int) (windowDimensions.y() / TWO)));
+                windowDimensions.x() / 2, (int) (windowDimensions.y() / 2)));
         gameObjects.addGameObject(paddle, Layer.STATIC_OBJECTS);
     }
 }

@@ -10,15 +10,13 @@ import danogl.gui.WindowController;
 import danogl.gui.rendering.Renderable;
 import danogl.util.Counter;
 import danogl.util.Vector2;
+import src.Constants;
 import src.gameobjects.Ball;
 
-import static src.BrickerGameManager.*;
 //TODO: fix the balls layer
 public class AdditionalBallsStrategy implements CollisionStrategy {
-    // ====================== constants ======================
-    public static final String ASSETS_BALL_PNG = "assets/mockBall.png";
-    private GameObjectCollection gameObjects;
     // ====================== fields ======================
+    private final GameObjectCollection gameObjects;
     private final Vector2 brickDimensions;
     private final Vector2 brickPosition;
     private final ImageReader imageReader;
@@ -44,8 +42,8 @@ public class AdditionalBallsStrategy implements CollisionStrategy {
     }
 
     private void createBall(int index) {
-        Renderable ballImage = imageReader.readImage(ASSETS_BALL_PNG, true);
-        Sound collisionSound = soundReader.readSound(ASSETS_BLOP_WAV);
+        Renderable ballImage = imageReader.readImage(Constants.ASSETS_BALL_PNG, true);
+        Sound collisionSound = soundReader.readSound(Constants.ASSETS_BLOP_WAV);
 
         float radius = brickDimensions.x()/3;
         float posY = brickPosition.y();

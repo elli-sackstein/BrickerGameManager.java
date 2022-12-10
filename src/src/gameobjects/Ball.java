@@ -16,9 +16,8 @@ public class Ball extends GameObject {
     private static final int OPPOSITE_DIRECTION = -1;
 
     private final Sound collisionSound;
-    private Boolean mainBall;
-    private GameManager gameManager;
-    private Counter collisionsCounter;
+    private final Boolean mainBall;
+    private final Counter collisionsCounter;
 
     /**
      * Construct a new GameObject instance.
@@ -39,8 +38,7 @@ public class Ball extends GameObject {
         super(topLeftCorner, dimensions, renderable);
         this.collisionSound = collisionSound;
         this.mainBall = mainBall;
-        this.gameManager = gameManager;
-            setCenter(position);
+        setCenter(position);
         collisionsCounter = new Counter(0);
     }
 

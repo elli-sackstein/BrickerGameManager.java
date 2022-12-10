@@ -10,10 +10,11 @@ import danogl.util.Vector2;
 import java.awt.*;
 
 public class NumericLifeCounter extends GameObject {
-    public static final int TWO_LIVES = 2;
-    public static final int ONE_LIFE = 1;
+    private static final int ONE_LIFE = 1;
+    private static final int TWO_LIVES = 2;
     private static final int THREE_LIVES = 3;
     private static final int FOUR_LIVES = 4;
+
     private final TextRenderable textRenderable;
     private final Counter livesCounter;
     /**

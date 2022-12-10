@@ -7,6 +7,7 @@ public class PowerUpStrategy implements CollisionStrategy{
     private final Vector2 brickPosition;
     private final Counter powerUpCounter;
     private final CollisionStrategyFactory factory;
+
     private int strategiesIndex;
 
     public PowerUpStrategy(CollisionStrategyFactory factory,
@@ -21,8 +22,8 @@ public class PowerUpStrategy implements CollisionStrategy{
     public void onCollision(GameObject collidedObj, GameObject colliderObj, Counter bricksCounter) {
         var strategies = createCollisionArray();
 
-        for (int i = 0; i < strategies.length; i++) {
-            strategies[i].onCollision(collidedObj, colliderObj, bricksCounter);
+        for (CollisionStrategy strategy : strategies) {
+            strategy.onCollision(collidedObj, colliderObj, bricksCounter);
         }
     }
 

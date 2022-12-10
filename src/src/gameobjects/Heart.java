@@ -9,6 +9,7 @@ import danogl.util.Vector2;
 
 public class Heart extends GameObject {
     private static final float HEART_SPEED = 100;
+
     private Vector2 windowDimensions;
     private GameObjectCollection gameObjects;
     private Counter livesCounter;

@@ -11,8 +11,9 @@ import src.gameobjects.GraphicLifeCounter;
 import java.util.Random;
 
 public class CollisionStrategyFactory {
-    private Counter powerUpCounter;
     private final static int NUM_OF_STRATEGY = 6;
+
+    private Counter powerUpCounter;
     private GameObjectCollection gameObjects;
     private Vector2 brickDimensions;
     private ImageReader imageReader;
