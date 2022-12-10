@@ -42,7 +42,7 @@ public class AdditionalBallsStrategy implements CollisionStrategy {
     }
 
     private void createBall(int index) {
-        Renderable ballImage = imageReader.readImage(Constants.ASSETS_BALL_PNG, true);
+        Renderable ballImage = imageReader.readImage(Constants.ASSETS_PUCK_BALL_PNG, true);
         Sound collisionSound = soundReader.readSound(Constants.ASSETS_BLOP_WAV);
 
         float radius = brickDimensions.x()/3;
@@ -61,6 +61,6 @@ public class AdditionalBallsStrategy implements CollisionStrategy {
         // TODO:why not in the constructor?
         ball.setRandomVelocity();
 
-        gameObjects.addGameObject(ball, Layer.STATIC_OBJECTS);
+        gameObjects.addGameObject(ball);
     }
 }

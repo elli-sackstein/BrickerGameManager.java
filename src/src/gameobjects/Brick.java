@@ -41,8 +41,9 @@ public class Brick extends GameObject {
     public void onCollisionEnter(GameObject other, Collision collision) {
         super.onCollisionEnter(other, collision);
         strategy.onCollision(this, other, counter);
+        counter.decrement();
 
         gameObjects.removeGameObject(this, Layer.STATIC_OBJECTS);
-        counter.decrement();
+        System.out.println(counter.value());
     }
 }
